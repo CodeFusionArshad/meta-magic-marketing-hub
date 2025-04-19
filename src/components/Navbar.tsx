@@ -1,12 +1,13 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const location = useLocation();
+  
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
@@ -20,9 +21,9 @@ const Navbar = () => {
         
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">
-          <NavLinks />
+          <NavLinks currentPath={location.pathname} />
           <Button className="bg-marketing-blue hover:bg-marketing-darkblue transition-colors">
-            Book Consultation
+            <Link to="/contact">Book Consultation</Link>
           </Button>
         </div>
         
@@ -40,9 +41,9 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-white py-4 px-4 shadow-md absolute w-full animate-fade-in">
           <div className="flex flex-col gap-4">
-            <NavLinks mobile onClick={() => setIsMenuOpen(false)} />
+            <NavLinks mobile onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
             <Button className="bg-marketing-blue hover:bg-marketing-darkblue transition-colors w-full">
-              Book Consultation
+              <Link to="/contact" onClick={() => setIsMenuOpen(false)}>Book Consultation</Link>
             </Button>
           </div>
         </div>
@@ -54,9 +55,10 @@ const Navbar = () => {
 interface NavLinksProps {
   mobile?: boolean;
   onClick?: () => void;
+  currentPath: string;
 }
 
-const NavLinks = ({ mobile, onClick }: NavLinksProps) => {
+const NavLinks = ({ mobile, onClick, currentPath }: NavLinksProps) => {
   const links = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
@@ -73,7 +75,11 @@ const NavLinks = ({ mobile, onClick }: NavLinksProps) => {
         <Link
           key={link.name}
           to={link.path}
-          className={`font-medium text-marketing-darkgray hover:text-marketing-blue transition-colors ${
+          className={`font-medium transition-colors ${
+            currentPath === link.path 
+              ? 'text-marketing-blue' 
+              : 'text-marketing-darkgray hover:text-marketing-blue'
+          } ${
             mobile ? 'py-2 border-b border-gray-100' : ''
           }`}
           onClick={onClick}
