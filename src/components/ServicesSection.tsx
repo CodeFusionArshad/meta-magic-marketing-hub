@@ -2,42 +2,57 @@
 import React from 'react';
 import { Facebook, Instagram, Search, Users, Briefcase, Youtube, Globe } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 const services = [
   {
     icon: Facebook,
     title: "Meta Ads Campaign Setup & Management",
     description: "Strategic campaign creation, audience targeting, and optimization to maximize your ROI on Facebook and Instagram platforms.",
+    tier: "paid",
+    price: "Starting at $199/month"
   },
   {
     icon: Search,
     title: "Google Ads",
     description: "PPC campaigns that drive targeted traffic to your website from Google Search, Display and YouTube networks.",
+    tier: "paid",
+    price: "Starting at $299/month"
   },
   {
     icon: Instagram,
-    title: "Instagram/Facebook Paid Marketing",
-    description: "Engaging visual campaigns specifically designed for Instagram and Facebook to increase brand awareness and drive engagement.",
+    title: "Social Media Consultation",
+    description: "Initial 30-minute consultation to discuss your Instagram and Facebook marketing strategy.",
+    tier: "free",
+    price: "Free"
   },
   {
     icon: Users,
-    title: "Lead Generation Strategy",
-    description: "Comprehensive lead generation strategies to convert your audience into qualified prospects and customers.",
+    title: "Basic Lead Generation Guide",
+    description: "Access to our foundational guide on lead generation strategies for beginners.",
+    tier: "free",
+    price: "Free"
   },
   {
     icon: Briefcase,
-    title: "Freelancing & Online Business Setup",
-    description: "Complete guidance on establishing your online business presence and freelancing operations.",
+    title: "Freelancing Starter Kit",
+    description: "Essential resources and tips to start your freelancing journey.",
+    tier: "free",
+    price: "Free"
   },
   {
     icon: Youtube,
     title: "YouTube Automation",
     description: "Streamlined YouTube channel management and content strategy to grow your audience and monetize your channel.",
+    tier: "paid",
+    price: "Starting at $149/month"
   },
   {
     icon: Globe,
     title: "Web Portfolio Creation",
     description: "Professional website development focused on showcasing your work and converting visitors into clients.",
+    tier: "paid",
+    price: "Custom quote"
   }
 ];
 
@@ -50,7 +65,7 @@ const ServicesSection = () => {
             My <span className="text-gradient">Services</span>
           </h2>
           <p className="mt-4 text-gray-600 max-w-xl mx-auto">
-            Comprehensive digital marketing solutions tailored to help your business grow online and generate measurable results.
+            From free resources to premium solutions, we offer services for every stage of your business journey.
           </p>
           <div className="w-20 h-1 bg-marketing-purple mx-auto mt-4"></div>
         </div>
@@ -62,6 +77,8 @@ const ServicesSection = () => {
               Icon={service.icon} 
               title={service.title} 
               description={service.description}
+              tier={service.tier}
+              price={service.price}
             />
           ))}
         </div>
@@ -86,17 +103,27 @@ interface ServiceCardProps {
   Icon: React.ElementType;
   title: string;
   description: string;
+  tier: 'free' | 'paid';
+  price: string;
 }
 
-const ServiceCard = ({ Icon, title, description }: ServiceCardProps) => {
+const ServiceCard = ({ Icon, title, description, tier, price }: ServiceCardProps) => {
   return (
     <Card className="border border-gray-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden h-full group">
       <CardContent className="p-6">
-        <div className="bg-marketing-blue/10 w-16 h-16 rounded-full flex items-center justify-center mb-6 group-hover:bg-marketing-blue/20 transition-colors">
-          <Icon className="text-marketing-blue" size={24} />
+        <div className="flex justify-between items-start mb-6">
+          <div className="bg-marketing-blue/10 w-16 h-16 rounded-full flex items-center justify-center group-hover:bg-marketing-blue/20 transition-colors">
+            <Icon className="text-marketing-blue" size={24} />
+          </div>
+          <Badge variant={tier === 'free' ? 'secondary' : 'default'} className="uppercase">
+            {tier}
+          </Badge>
         </div>
         <CardTitle className="text-xl mb-3 font-poppins">{title}</CardTitle>
-        <CardDescription className="text-gray-600">{description}</CardDescription>
+        <CardDescription className="text-gray-600 mb-4">{description}</CardDescription>
+        <p className={`text-sm font-medium ${tier === 'free' ? 'text-green-600' : 'text-marketing-purple'}`}>
+          {price}
+        </p>
       </CardContent>
     </Card>
   );
