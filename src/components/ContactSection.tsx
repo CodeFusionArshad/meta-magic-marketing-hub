@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Mail, Phone, MapPin, Send, MessageSquare, Instagram, Facebook, Linkedin, Youtube } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
+import { Link } from 'react-router-dom';
 
 const ContactSection = () => {
   const { toast } = useToast();
@@ -193,8 +194,8 @@ const ContactSection = () => {
               <p className="text-gray-600 mb-4">
                 Schedule a free 30-minute consultation call to discuss your project.
               </p>
-              <Button className="bg-marketing-blue hover:bg-marketing-darkblue">
-                Book a Call
+              <Button className="bg-marketing-blue hover:bg-marketing-darkblue" asChild>
+                <Link to="/contact">Book a Call</Link>
               </Button>
             </div>
           </div>

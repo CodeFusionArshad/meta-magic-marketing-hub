@@ -22,7 +22,7 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">
           <NavLinks currentPath={location.pathname} />
-          <Button className="bg-marketing-blue hover:bg-marketing-darkblue transition-colors">
+          <Button className="bg-marketing-blue hover:bg-marketing-darkblue transition-colors" asChild>
             <Link to="/contact">Book Consultation</Link>
           </Button>
         </div>
@@ -42,7 +42,7 @@ const Navbar = () => {
         <div className="md:hidden bg-white py-4 px-4 shadow-md absolute w-full animate-fade-in">
           <div className="flex flex-col gap-4">
             <NavLinks mobile onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
-            <Button className="bg-marketing-blue hover:bg-marketing-darkblue transition-colors w-full">
+            <Button className="bg-marketing-blue hover:bg-marketing-darkblue transition-colors w-full" asChild>
               <Link to="/contact" onClick={() => setIsMenuOpen(false)}>Book Consultation</Link>
             </Button>
           </div>

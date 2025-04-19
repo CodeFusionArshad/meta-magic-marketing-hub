@@ -2,6 +2,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Calendar } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
   return (
@@ -21,14 +22,18 @@ const HeroSection = () => {
             </p>
             
             <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-slide-up animate-delay-400">
-              <Button className="bg-marketing-blue hover:bg-marketing-darkblue text-white font-medium px-6 py-6 rounded-full flex items-center gap-2">
-                <Calendar size={18} />
-                Book Free Consultation
+              <Button className="bg-marketing-blue hover:bg-marketing-darkblue text-white font-medium px-6 py-6 rounded-full flex items-center gap-2" asChild>
+                <Link to="/contact">
+                  <Calendar size={18} />
+                  Book Free Consultation
+                </Link>
               </Button>
               
-              <Button variant="outline" className="border-marketing-purple text-marketing-purple hover:bg-marketing-purple/10 font-medium px-6 py-6 rounded-full flex items-center gap-2">
-                See My Work
-                <ArrowRight size={18} />
+              <Button variant="outline" className="border-marketing-purple text-marketing-purple hover:bg-marketing-purple/10 font-medium px-6 py-6 rounded-full flex items-center gap-2" asChild>
+                <Link to="/portfolio">
+                  See My Work
+                  <ArrowRight size={18} />
+                </Link>
               </Button>
             </div>
           </div>
